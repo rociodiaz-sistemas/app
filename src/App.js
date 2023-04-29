@@ -1,13 +1,14 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import './App.css';
 import AbilityCard from './components/AbilityCard';
-import AbilityDeck from './components/AbilityDeck';
+import Hand from './components/Hand';
 import theme from './theme/theme';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <AbilityDeck />
+      <div id="container-combat"></div>
+      <Hand />
     </ChakraProvider>
   );
 }

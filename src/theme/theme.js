@@ -5,8 +5,11 @@ const theme = extendTheme({
         Text: {
           variants: {
             cardDescription: {
-              fontSize: '0.75em'
+              fontSize: '0.6em'
             },
+            classCardFooter: {
+                fontSize: '0.7em'
+            }
             // ...and so on
           },
         },
