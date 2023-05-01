@@ -7,14 +7,15 @@ import propTypes from 'prop-types';
 function AbilityCard({ card, ...rest }) {
     return (
 
-        <Card bg="white"
+        <Card
+            bg="white"
             border="1px solid"
             borderColor="gray.300"
             borderRadius="md"
             h="260px"
             w="160px"
             position="relative"
-            opacity="0.8"
+            opacity="1"
             transition="transform .5s ease, opacity .5s ease, scale .5s ease"
             _hover={{
                 transform: "scale(1.7) rotate(0)",
@@ -37,7 +38,7 @@ function AbilityCard({ card, ...rest }) {
             </CardBody>
             <CardFooter pb={2}>
                 <Stack direction='row' spacing='1' alignItems='center'>
-                    <GiBroadDagger size={15}/><Text variant='classCardFooter'>{card.class}</Text>
+                    <GiBroadDagger size={15} /><Text variant='classCardFooter'>{card.class}</Text>
                 </Stack>
             </CardFooter>
         </Card>
