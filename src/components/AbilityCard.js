@@ -18,9 +18,8 @@ function AbilityCard({ card, ...rest }) {
             opacity="1"
             transition="transform .5s ease, opacity .5s ease, scale .5s ease"
             _hover={{
-                transform: "scale(1.7) rotate(0)",
+                transform: "scale(1.0) rotate(0) translateY(-20%)",
                 opacity: "1",
-                zIndex: "9999",
             }}
             {...rest}
         >

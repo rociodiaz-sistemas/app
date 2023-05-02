@@ -1,4 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
+import { useEffect, useRef, useState } from 'react';
 import AbilityCard from './AbilityCard';
 const cards = [
     { title: 'Eldritch Blast', description: 'A beam of crackling energy streaks toward a creature within range.', class: 'Warlock' },
@@ -10,12 +11,49 @@ const cards = [
     { title: 'Channel Divinity', description: 'You can channel divine energy directly from your deity, using that energy to fuel magical effects.', class: 'Cleric' },
     { title: 'Bardic Inspiration', description: 'You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you.', class: 'Bard' },
     { title: 'Lay on Hands', description: 'Your blessed touch can heal wounds. You have a pool of healing power that replenishes when you take a long rest.', class: 'Paladin' },
-    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' }
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+    { title: 'Darkvision', description: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.', class: 'Warlock' },
+
 ];
 const CardContainer = () => {
-    let cardWidth = 160; // width of each card, this should be replaced with the actual card width
-    let cardOverlap = 30; // adjust this value to increase/decrease overlap
+    const [cardWidth, setCardWidth] = useState(160);
+    const [cardOverlap, setCardOverlap] = useState(40);
     let cardTotal = cards.length;
+
+    const handleResize = () => {
+        const cardContainerWidth = cardContainerRef.current.clientWidth;
+        const newCardOverlap = Math.floor(cardContainerWidth / 6);
+        const newCardWidth = Math.floor(
+            (cardContainerWidth - newCardOverlap * (cards.length - 1)) / cards.length
+        );
+        setCardOverlap(newCardOverlap);
+        setCardWidth(newCardWidth);
+    };
+
+    const cardContainerRef = useRef(null);
+
+    useEffect(() => {
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
 
     return (
         // Use Flex to create a container that is centered and occupies 80% of the width and 50% of the height of the page
@@ -26,9 +64,13 @@ const CardContainer = () => {
                     // The Box for each card is absolutely positioned within the relative Box, creating the overlap effect
                     <Box
                         position="absolute" // this causes the cards to be positioned relative to the parent Box
-                        left={`${index * cardOverlap}px`} // this shifts each card to the right based on its index, creating the overlap
+                        right={`${index * cardOverlap}px`} // this shifts each card to the right based on its index, creating the overlap
                         zIndex={index} // this ensures that each card appears on top of the one before it
                         key={card}
+                        _hover={{
+                            zIndex: 1000, // this ensures that the hovered card appears on top of all other cards
+                        }}
+                        ref={cardContainerRef}
                     >
                         <AbilityCard card={card} />
                     </Box>
